@@ -5,6 +5,7 @@ import { getConfirmedData } from './data/JHU';
 import { ProvincialTrend } from './types/responses';
 import { GlobalStyles } from './styles/globals';
 import { Card } from './components/Card';
+import { getTrendsForCountry } from './utils/filters';
 
 const AppBackground = styled('div')`
   background-color: ${background};
@@ -19,14 +20,20 @@ export function App() {
   const [trends, setTrends] = useState<ProvincialTrend[]>([]);
 
   useEffect(() => {
-    getConfirmedData().then(setTrends);
+    getConfirmedData().then((allTrends) => {
+      setTrends(getTrendsForCountry(allTrends, 'Canada'));
+    });
   }, []);
 
   return (
     <>
       <GlobalStyles />
       <AppBackground>
-        <Card title="Data Points">{trends.length}</Card>
+        <Card title="Data Points">
+          {trends.map((trend) => (
+            <p>{trend.province}</p>
+          ))}
+        </Card>
       </AppBackground>
     </>
   );
