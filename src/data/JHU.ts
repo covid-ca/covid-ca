@@ -1,7 +1,8 @@
 import { ProvincialTrend } from '../types/responses';
 import { extractProvincialData } from '../utils/transformers';
 
-const BASE_PATH = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_';
+const BASE_PATH =
+  'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_';
 
 const CONFIRMED_PATH = BASE_PATH + 'confirmed_global.csv';
 

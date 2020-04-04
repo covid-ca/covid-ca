@@ -12,10 +12,9 @@ export function extractProvincialData(raw: string): ProvincialTrend[] {
     const rawTrend = columns.slice(JHUColumn.Data);
     data.push({
       province: columns[JHUColumn.Province],
-      country:  columns[JHUColumn.Country],
-      data: rawTrend.map((entry) => parseInt(entry))
-    })
+      country: columns[JHUColumn.Country],
+      data: rawTrend.map((entry) => parseInt(entry)),
+    });
   }
-
   return data;
 }

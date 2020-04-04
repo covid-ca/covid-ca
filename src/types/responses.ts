@@ -7,5 +7,5 @@ export interface ProvincialTrend {
 export enum JHUColumn {
   Province = 0,
   Country = 1,
-  Data = 4
+  Data = 4,
 }
