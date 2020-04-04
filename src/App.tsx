@@ -4,10 +4,15 @@ import { background } from './constants/color';
 import { getConfirmedData } from './data/JHU';
 import { ProvincialTrend } from './types/responses';
 import { GlobalStyles } from './styles/globals';
+import { Card } from './components/Card';
 
 const AppBackground = styled('div')`
   background-color: ${background};
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
 `;
 
 export function App() {
@@ -20,7 +25,9 @@ export function App() {
   return (
     <>
       <GlobalStyles />
-      <AppBackground>Data points: {trends.length}</AppBackground>
+      <AppBackground>
+        <Card title="Data Points">{trends.length}</Card>
+      </AppBackground>
     </>
   );
 }

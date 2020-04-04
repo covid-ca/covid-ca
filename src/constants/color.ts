@@ -1,2 +1,2 @@
 export const primary = '#eea941';
-export const background = '#fefaf5';
+export const background = '#efefef';
