@@ -14,6 +14,7 @@ const Wrapper = styled('div')`
   border: 3px solid white;
   width: 100%;
   max-width: 990px;
+  margin-bottom: 16px;
 `;
 
 const Header = styled('h2')`
