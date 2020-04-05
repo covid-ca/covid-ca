@@ -29,10 +29,15 @@ export function App() {
     <>
       <GlobalStyles />
       <AppBackground>
-        <Card title="Data Points">
-          {trends.map((trend) => (
-            <p>{trend.province}</p>
-          ))}
+        <Card title="Last 5 days">
+          {trends.map((trend) => {
+            const last5Diffs = trend.dayOverDay.slice(-6, -1);
+            return (
+              <p>
+                {trend.province} +{last5Diffs.join(', +')}
+              </p>
+            );
+          })}
         </Card>
       </AppBackground>
     </>

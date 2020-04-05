@@ -2,6 +2,7 @@ export interface ProvincialTrend {
   province: string;
   country: string;
   data: number[];
+  dayOverDay: number[];
 }
 
 export enum JHUColumn {
