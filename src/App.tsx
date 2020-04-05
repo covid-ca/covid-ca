@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { background, graphic } from './constants/color';
+import { background, graphic, graphicLight } from './constants/color';
 import { getConfirmedData } from './data/JHU';
 import { ProvincialTrend } from './types/responses';
 import { GlobalStyles } from './styles/globals';
@@ -60,11 +60,12 @@ export function App() {
                 <ProvinceTitle>{trend.province}</ProvinceTitle>
                 <Spacer />
                 <Trend
-                  data={trend.data.slice(-31, -1)}
+                  data={trend.data.slice(-30)}
                   height={40}
                   width={100}
-                  stroke={graphic}
                   strokeWidth={2}
+                  autoDraw={true}
+                  gradient={[graphicLight, graphic]}
                 />
                 <Confirmed>{trend.data[trend.data.length - 1]}</Confirmed>
               </DataRow>

@@ -1,3 +1,4 @@
 export const primary = '#eea941';
-export const graphic = '#ff6961';
+export const graphic = '#ff4238';
+export const graphicLight = '#ffcac8';
 export const background = '#efefef';
