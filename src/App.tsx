@@ -7,6 +7,7 @@ import { GlobalStyles } from './styles/globals';
 import { Card } from './components/Card';
 import { getTrendsForCountry } from './utils/filters';
 import { TrendData } from './components/TrendData';
+import { PageTitle } from './components/PageTitle';
 
 const AppBackground = styled('div')`
   background-color: ${background};
@@ -34,6 +35,7 @@ export function App() {
     <>
       <GlobalStyles />
       <AppBackground>
+        <PageTitle>COVID-19 in Canada</PageTitle>
         <Card title="Last 30 days (cases)">
           <TrendData trends={confirmedTrends} />
         </Card>
