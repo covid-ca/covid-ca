@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { background } from './constants/color';
 import { getConfirmedData, getDeathsData } from './data/JHU';
 import { ProvincialTrend } from './types/responses';
 import { GlobalStyles } from './styles/globals';
@@ -10,7 +9,6 @@ import { TrendData } from './components/TrendData';
 import { PageTitle } from './components/PageTitle';
 
 const AppBackground = styled('div')`
-  background-color: ${background};
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -36,10 +34,10 @@ export function App() {
       <GlobalStyles />
       <AppBackground>
         <PageTitle>COVID-19 in Canada</PageTitle>
-        <Card title="Last 30 days (cases)">
+        <Card title="Total cases">
           <TrendData trends={confirmedTrends} />
         </Card>
-        <Card title="Last 30 days (deaths)">
+        <Card title="Total deaths">
           <TrendData trends={deathsTrends} />
         </Card>
       </AppBackground>
