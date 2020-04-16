@@ -5,7 +5,7 @@ import { ProvincialTrend } from './types/responses';
 import { GlobalStyles } from './styles/globals';
 import { Card } from './components/Card';
 import { getTrendsForCountry } from './utils/filters';
-import { TrendData } from './components/TrendData';
+import { TrendData, TrendType } from './components/TrendData';
 import { PageTitle } from './components/PageTitle';
 
 const AppBackground = styled('div')`
@@ -34,11 +34,11 @@ export function App() {
       <GlobalStyles />
       <AppBackground>
         <PageTitle>COVID-19 in Canada</PageTitle>
-        <Card title="Total cases">
-          <TrendData trends={confirmedTrends} />
+        <Card title="New cases">
+          <TrendData trends={confirmedTrends} trendType={TrendType.New} />
         </Card>
         <Card title="Total deaths">
-          <TrendData trends={deathsTrends} />
+          <TrendData trends={deathsTrends} trendType={TrendType.Cumulative} />
         </Card>
       </AppBackground>
     </>
