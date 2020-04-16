@@ -29,7 +29,7 @@ export const TrendData: React.FunctionComponent<TrendDataProps> = (props) => {
             <ProvinceTitle>{trend.province}</ProvinceTitle>
             <Spacer />
             <Trend
-              data={trendData.slice(-30)}
+              data={trendData.slice(-45)}
               height={40}
               width={100}
               strokeWidth={2}

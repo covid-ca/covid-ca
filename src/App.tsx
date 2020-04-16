@@ -7,6 +7,7 @@ import { Card } from './components/Card';
 import { getTrendsForCountry } from './utils/filters';
 import { TrendData, TrendType } from './components/TrendData';
 import { PageTitle } from './components/PageTitle';
+import { appendAggregate } from './utils/transformers';
 
 const AppBackground = styled('div')`
   min-height: 100vh;
@@ -22,10 +23,14 @@ export function App() {
 
   useEffect(() => {
     getConfirmedData().then((allTrends) => {
-      setConfirmedTrends(getTrendsForCountry(allTrends, 'Canada'));
+      setConfirmedTrends(
+        appendAggregate(getTrendsForCountry(allTrends, 'Canada'), 'Canada')
+      );
     });
     getDeathsData().then((allTrends) => {
-      setDeathsTrends(getTrendsForCountry(allTrends, 'Canada'));
+      setDeathsTrends(
+        appendAggregate(getTrendsForCountry(allTrends, 'Canada'), 'Canada')
+      );
     });
   }, []);
 

@@ -4,7 +4,6 @@ export function extractProvincialData(raw: string): ProvincialTrend[] {
   const data: ProvincialTrend[] = [];
 
   const rows = raw.split('\n');
-  // const headerRow = rows[0];
 
   // skip the header
   for (let i = 1; i < rows.length; i++) {
@@ -25,4 +24,30 @@ export function extractProvincialData(raw: string): ProvincialTrend[] {
     });
   }
   return data;
+}
+
+export function appendAggregate(trends: ProvincialTrend[], name: string) {
+  const aggregate: ProvincialTrend = {
+    country: name,
+    province: name,
+    data: [],
+    dayOverDay: [],
+  };
+
+  if (trends.length > 0) {
+    for (let i = 0; i < trends[0].data.length; i++) {
+      const dailySum = trends.reduce((sum, trend) => sum + trend.data[i], 0);
+      aggregate.data.push(dailySum);
+    }
+
+    for (let i = 0; i < trends[0].dayOverDay.length; i++) {
+      const dailySum = trends.reduce(
+        (sum, trend) => sum + trend.dayOverDay[i],
+        0
+      );
+      aggregate.dayOverDay.push(dailySum);
+    }
+  }
+
+  return [aggregate, ...trends];
 }
