@@ -29,14 +29,14 @@ export const TrendData: React.FunctionComponent<TrendDataProps> = (props) => {
             <ProvinceTitle>{trend.province}</ProvinceTitle>
             <Spacer />
             <Trend
-              data={trendData.slice(-45)}
+              data={trendData.slice(-50, -1)}
               height={40}
               width={100}
               strokeWidth={2}
               autoDraw={true}
               gradient={[graphicLight, graphic]}
             />
-            <DataLabel>{trend.data[trend.data.length - 1]}</DataLabel>
+            <DataLabel>{trend.data[trend.data.length - 2]}</DataLabel>
           </Row>
         );
       })}

@@ -39,10 +39,10 @@ export function App() {
       <GlobalStyles />
       <AppBackground>
         <PageTitle>COVID-19 in Canada</PageTitle>
-        <Card title="New cases">
+        <Card title="New cases trendline / total cases">
           <TrendData trends={confirmedTrends} trendType={TrendType.New} />
         </Card>
-        <Card title="Total deaths">
+        <Card title="Total deaths trendline / total deaths">
           <TrendData trends={deathsTrends} trendType={TrendType.Cumulative} />
         </Card>
       </AppBackground>
