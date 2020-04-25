@@ -45,6 +45,17 @@ export function App() {
         <Card title="Total deaths trendline / total deaths">
           <TrendData trends={deathsTrends} trendType={TrendType.Cumulative} />
         </Card>
+        <p>
+          All data provided by{' '}
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://github.com/CSSEGISandData/COVID-19"
+          >
+            John Hopkins
+          </a>
+          .
+        </p>
       </AppBackground>
     </>
   );
