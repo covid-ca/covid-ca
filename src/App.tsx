@@ -7,6 +7,7 @@ import { Card } from './components/Card';
 import { getTrendsForCountry } from './utils/filters';
 import { TrendData, TrendType } from './components/TrendData';
 import { PageTitle } from './components/PageTitle';
+import { HighLevel } from './components/HighLevel';
 import { appendAggregate } from './utils/transformers';
 
 const AppBackground = styled('div')`
@@ -39,6 +40,9 @@ export function App() {
       <GlobalStyles />
       <AppBackground>
         <PageTitle>COVID-19 in Canada</PageTitle>
+        <Card title="New cases / 5 day rolling average">
+          <HighLevel trend={confirmedTrends[0]} />
+        </Card>
         <Card title="New cases trendline / total cases">
           <TrendData trends={confirmedTrends} trendType={TrendType.New} />
         </Card>
