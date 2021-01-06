@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getConfirmedData, getDeathsData } from './data/JHU';
-import { ProvincialTrend } from './types/responses';
+import { AdministeredTrend, ProvincialTrend } from './types/responses';
 import { GlobalStyles } from './styles/globals';
 import { Card } from './components/Card';
 import { getTrendsForCountry } from './utils/filters';
@@ -9,6 +9,8 @@ import { TrendData, TrendType } from './components/TrendData';
 import { PageTitle } from './components/PageTitle';
 import { HighLevel } from './components/HighLevel';
 import { appendAggregate } from './utils/transformers';
+import { getVaccinesAdministered } from './data/UOT';
+import { Vaccinnes } from './components/Vaccines';
 
 const AppBackground = styled('div')`
   min-height: 100vh;
@@ -21,6 +23,7 @@ const AppBackground = styled('div')`
 export function App() {
   const [confirmedTrends, setConfirmedTrends] = useState<ProvincialTrend[]>([]);
   const [deathsTrends, setDeathsTrends] = useState<ProvincialTrend[]>([]);
+  const [vaccineTrends, setVaccineTrends] = useState<AdministeredTrend[]>([]);
 
   useEffect(() => {
     getConfirmedData().then((allTrends) => {
@@ -33,6 +36,9 @@ export function App() {
         appendAggregate(getTrendsForCountry(allTrends, 'Canada'), 'Canada')
       );
     });
+    getVaccinesAdministered().then((trends) => {
+      setVaccineTrends(trends);
+    });
   }, []);
 
   return (
@@ -40,6 +46,9 @@ export function App() {
       <GlobalStyles />
       <AppBackground>
         <PageTitle>COVID-19 in Canada</PageTitle>
+        <Card title="Administered">
+          <Vaccinnes trends={vaccineTrends} />
+        </Card>
         <Card title="New cases / 5 day rolling average">
           <HighLevel trend={confirmedTrends[0]} />
         </Card>

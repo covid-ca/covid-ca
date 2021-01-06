@@ -1,4 +1,11 @@
-import { ProvincialTrend, JHUColumn } from '../types/responses';
+import {
+  ProvincialTrend,
+  JHUColumn,
+  AdministeredTrend,
+  AdministeredDay,
+  UOTResponseEntry,
+} from '../types/responses';
+import csv from 'csvtojson';
 
 export function extractProvincialData(raw: string): ProvincialTrend[] {
   const data: ProvincialTrend[] = [];
@@ -50,4 +57,55 @@ export function appendAggregate(trends: ProvincialTrend[], name: string) {
   }
 
   return [aggregate, ...trends];
+}
+
+export async function extractVaccinesAdministeredData(
+  raw: string
+): Promise<AdministeredTrend[]> {
+  const aggTrend: AdministeredTrend = {
+    region: 'all of Canada',
+    data: [],
+  };
+
+  const data = (await csv().fromString(raw)) as UOTResponseEntry[];
+
+  const dateMap: { [date: string]: AdministeredDay } = {};
+  const provincialTrendMap: { [province: string]: AdministeredTrend } = {};
+  const provincialTrends: AdministeredTrend[] = [];
+
+  for (let i = 0; i < data.length; i++) {
+    const entry = data[i];
+    let day = dateMap[entry.date_vaccine_administered];
+    let provincialTrend = provincialTrendMap[entry.province];
+    if (!provincialTrend) {
+      provincialTrend = {
+        region: entry.province,
+        data: [],
+      };
+      provincialTrendMap[entry.province] = provincialTrend;
+      provincialTrends.push(provincialTrend);
+    }
+    if (!day) {
+      day = {
+        date: getDateFromUOTDate(entry.date_vaccine_administered),
+        cumulative: 0,
+        incremental: 0,
+      };
+      dateMap[entry.date_vaccine_administered] = day;
+      aggTrend.data.push(day);
+    }
+    day.cumulative += parseInt(entry.cumulative_avaccine);
+    day.incremental += parseInt(entry.avaccine);
+    provincialTrend.data.push({
+      cumulative: parseInt(entry.cumulative_avaccine),
+      date: day.date,
+      incremental: parseInt(entry.avaccine),
+    });
+  }
+  return [aggTrend, ...provincialTrends];
+}
+
+function getDateFromUOTDate(dateString: string): Date {
+  const [day, month, year] = dateString.split('-');
+  return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
 }
