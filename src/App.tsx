@@ -66,6 +66,10 @@ export function App() {
             href="https://github.com/CSSEGISandData/COVID-19"
           >
             John Hopkins
+          </a>{' '}
+          and the{' '}
+          <a href="https://github.com/ccodwg/Covid19Canada">
+            COVID-19 Canada Open Data Working Group
           </a>
           .
         </p>

@@ -57,7 +57,7 @@ export const Vaccinnes: React.FunctionComponent<VaccinesProps> = (props) => {
   return (
     <>
       <p>
-        Showing doses for{' '}
+        Showing daily doses for{' '}
         <select value={region} onChange={(e) => setRegion(e.target.value)}>
           {options.map((option) => (
             <option label={option} value={option} key={option} />
@@ -81,7 +81,7 @@ export const Vaccinnes: React.FunctionComponent<VaccinesProps> = (props) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="cumulative" barSize={20} fill="#413ea0" />
+          <Bar dataKey="incremental" barSize={20} fill="#413ea0" />
         </ComposedChart>
       </div>
       <Table>
